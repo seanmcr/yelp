@@ -35,7 +35,7 @@ class BusinessCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        logoImageView.layer.cornerRadius = 3
+        logoImageView.layer.cornerRadius = 5
         logoImageView.clipsToBounds = true
     }
 
