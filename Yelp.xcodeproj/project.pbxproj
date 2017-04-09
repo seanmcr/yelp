@@ -20,6 +20,9 @@
 		AB4BE8E21E9779E9007C05AA /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8E11E9779E9007C05AA /* SwitchCell.swift */; };
 		AB4BE8E41E977BD7007C05AA /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8E31E977BD7007C05AA /* FiltersViewController.swift */; };
 		AB4BE8E61E977F35007C05AA /* YelpCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8E51E977F35007C05AA /* YelpCategories.swift */; };
+		AB4BE8E81E997D4C007C05AA /* FilterSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8E71E997D4C007C05AA /* FilterSettings.swift */; };
+		AB4BE8EC1E9A90B7007C05AA /* RadioOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8EB1E9A90B7007C05AA /* RadioOptionCell.swift */; };
+		AB4BE8EE1E9A9195007C05AA /* CircularCheckMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4BE8ED1E9A9195007C05AA /* CircularCheckMarkView.swift */; };
 		ABEF975B1E961DFA0035D95F /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEF975A1E961DFA0035D95F /* BusinessCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		AB4BE8E11E9779E9007C05AA /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		AB4BE8E31E977BD7007C05AA /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		AB4BE8E51E977F35007C05AA /* YelpCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpCategories.swift; sourceTree = "<group>"; };
+		AB4BE8E71E997D4C007C05AA /* FilterSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSettings.swift; sourceTree = "<group>"; };
+		AB4BE8EB1E9A90B7007C05AA /* RadioOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioOptionCell.swift; sourceTree = "<group>"; };
+		AB4BE8ED1E9A9195007C05AA /* CircularCheckMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularCheckMarkView.swift; sourceTree = "<group>"; };
 		ABEF975A1E961DFA0035D95F /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				22AAAA981AEA0A9700A544AF /* Business.swift */,
+				AB4BE8E71E997D4C007C05AA /* FilterSettings.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -181,6 +188,8 @@
 			children = (
 				ABEF975A1E961DFA0035D95F /* BusinessCell.swift */,
 				AB4BE8E11E9779E9007C05AA /* SwitchCell.swift */,
+				AB4BE8EB1E9A90B7007C05AA /* RadioOptionCell.swift */,
+				AB4BE8ED1E9A9195007C05AA /* CircularCheckMarkView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -399,11 +408,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB4BE8EE1E9A9195007C05AA /* CircularCheckMarkView.swift in Sources */,
+				AB4BE8E81E997D4C007C05AA /* FilterSettings.swift in Sources */,
 				ABEF975B1E961DFA0035D95F /* BusinessCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				AB4BE8E41E977BD7007C05AA /* FiltersViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,
+				AB4BE8EC1E9A90B7007C05AA /* RadioOptionCell.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
 				AB4BE8E21E9779E9007C05AA /* SwitchCell.swift in Sources */,
 				AB4BE8E61E977F35007C05AA /* YelpCategories.swift in Sources */,

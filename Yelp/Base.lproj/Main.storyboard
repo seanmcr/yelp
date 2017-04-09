@@ -157,6 +157,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qK-y5-lIi">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                            <color key="value" red="0.45618118523316065" green="0.45618118523316065" blue="0.45618118523316065" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fO-rc-QYp">
                                                     <rect key="frame" x="8" y="25" width="47.5" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
@@ -170,13 +185,80 @@
                                             <constraints>
                                                 <constraint firstItem="0fO-rc-QYp" firstAttribute="centerY" secondItem="jSg-3d-DLq" secondAttribute="centerY" id="Q8h-Kt-Iu8"/>
                                                 <constraint firstItem="0fO-rc-QYp" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leading" constant="8" id="lE0-7Q-PRL"/>
+                                                <constraint firstAttribute="trailing" secondItem="4qK-y5-lIi" secondAttribute="trailing" id="qFo-fs-mnl"/>
+                                                <constraint firstItem="4qK-y5-lIi" firstAttribute="top" secondItem="jSg-3d-DLq" secondAttribute="top" id="ui9-fz-faF"/>
+                                                <constraint firstItem="4qK-y5-lIi" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leading" id="wPV-Cd-cTa"/>
                                                 <constraint firstItem="PS4-4R-K87" firstAttribute="centerY" secondItem="jSg-3d-DLq" secondAttribute="centerY" id="yxU-po-bfM"/>
+                                                <constraint firstAttribute="bottom" secondItem="4qK-y5-lIi" secondAttribute="bottom" id="z15-eU-Caw"/>
                                                 <constraint firstAttribute="trailing" secondItem="PS4-4R-K87" secondAttribute="trailing" constant="8" id="zUT-3m-kNp"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="switchLabel" destination="0fO-rc-QYp" id="poz-W6-qXa"/>
                                             <outlet property="toggleSwitch" destination="PS4-4R-K87" id="0MX-lg-HYb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadioOptionCell" rowHeight="73" id="Qsx-lV-IeM" customClass="RadioOptionCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="101" width="375" height="73"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Qsx-lV-IeM" id="96a-bz-FQ2">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMh-IA-0vd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                            <color key="value" red="0.45618118520000001" green="0.45618118520000001" blue="0.45618118520000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wz3-eq-l6x">
+                                                    <rect key="frame" x="8" y="25" width="47.5" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xib-db-PXI" customClass="CircularCheckMarkView" customModule="Yelp" customModuleProvider="target">
+                                                    <rect key="frame" x="337" y="21" width="30" height="30"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="jf0-qS-JOT"/>
+                                                        <constraint firstAttribute="height" constant="30" id="xVi-UF-eBL"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expandIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dvO-go-vr3">
+                                                    <rect key="frame" x="347" y="26" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="Aqa-sO-D1H"/>
+                                                        <constraint firstAttribute="height" constant="20" id="RRK-Ae-Pwy"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dvO-go-vr3" firstAttribute="centerY" secondItem="96a-bz-FQ2" secondAttribute="centerY" id="4RN-6T-V9k"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xib-db-PXI" secondAttribute="trailing" constant="8" id="9Cw-TK-PDv"/>
+                                                <constraint firstItem="wz3-eq-l6x" firstAttribute="leading" secondItem="96a-bz-FQ2" secondAttribute="leading" constant="8" id="H62-lJ-Xck"/>
+                                                <constraint firstItem="wz3-eq-l6x" firstAttribute="centerY" secondItem="96a-bz-FQ2" secondAttribute="centerY" id="WmS-b8-Ph1"/>
+                                                <constraint firstItem="Xib-db-PXI" firstAttribute="centerY" secondItem="96a-bz-FQ2" secondAttribute="centerY" id="mTy-V7-Wbf"/>
+                                                <constraint firstAttribute="bottom" secondItem="DMh-IA-0vd" secondAttribute="bottom" id="oA6-19-A4D"/>
+                                                <constraint firstItem="DMh-IA-0vd" firstAttribute="top" secondItem="96a-bz-FQ2" secondAttribute="top" id="su5-Pp-1Ob"/>
+                                                <constraint firstItem="DMh-IA-0vd" firstAttribute="leading" secondItem="96a-bz-FQ2" secondAttribute="leading" id="v0I-uD-Wwc"/>
+                                                <constraint firstAttribute="trailing" secondItem="dvO-go-vr3" secondAttribute="trailing" constant="8" id="xKw-zG-Jl4"/>
+                                                <constraint firstAttribute="trailing" secondItem="DMh-IA-0vd" secondAttribute="trailing" id="y1d-De-c7R"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkMark" destination="Xib-db-PXI" id="Prp-WE-Hq7"/>
+                                            <outlet property="checkMarkLabel" destination="wz3-eq-l6x" id="y9E-y4-UmB"/>
+                                            <outlet property="expandIcon" destination="dvO-go-vr3" id="pwd-Yj-QfI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -247,4 +329,7 @@
             <point key="canvasLocation" x="3792.8000000000002" y="367.46626686656674"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="expandIcon" width="32" height="32"/>
+    </resources>
 </document>
