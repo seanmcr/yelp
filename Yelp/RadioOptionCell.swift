@@ -18,6 +18,9 @@ class RadioOptionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        border.layer.cornerRadius = 5
+        border.layer.borderWidth = 1
+        border.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -23,6 +23,7 @@ class ExpandCollapseCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var border: UIView!
     @IBOutlet weak var moreLessLabel: UILabel!
     @IBOutlet weak var expandCollapseImage: UIImageView!
     
@@ -33,6 +34,9 @@ class ExpandCollapseCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        border.layer.cornerRadius = 5
+        border.layer.borderWidth = 1
+        border.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
