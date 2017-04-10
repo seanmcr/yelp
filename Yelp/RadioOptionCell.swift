@@ -10,6 +10,7 @@ import UIKit
 
 class RadioOptionCell: UITableViewCell {
 
+    @IBOutlet weak var border: UIView!
     @IBOutlet weak var checkMarkLabel: UILabel!
     @IBOutlet weak var checkMark: CircularCheckMarkView!
     @IBOutlet weak var expandIcon: UIImageView!

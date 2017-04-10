@@ -21,6 +21,7 @@ protocol TableViewExpandableSection: NSObjectProtocol {
 }
 
 protocol TableViewWithExpandableSectionsDelegate: NSObjectProtocol {
+    var tableView: UITableView! { get }
     func tableViewExpandableSection(section: TableViewExpandableSection, didExpand value: Bool)
 }
 
@@ -155,9 +156,7 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
         sectionNumber = section
         if (selectedValue != nil) {
             let defaultCategories = selectedValue as! [String]
-            for category in defaultCategories {
-                selectedCategories.insert(category)
-            }
+            selectedCategories = Set(defaultCategories)
         }
     }
     
@@ -180,6 +179,7 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
             let categoryFilter = CategoriesFilterSection.categoryFilters[indexPath.row]
             cell.switchLabel.text = categoryFilter.name
             cell.toggleSwitch.isOn = selectedCategories.contains(categoryFilter.code)
+            cell.delegate = self
             return cell
         }
     }
@@ -191,6 +191,18 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
         }
         delegate?.tableViewExpandableSection(section: self, didExpand: isExpanded)
     }
+    
+    func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
+        if let row = delegate!.tableView.indexPath(for: switchCell)?.row {
+            let category = CategoriesFilterSection.categoryFilters[row].code
+            if (selectedCategories.contains(category)) {
+                selectedCategories.remove(category)
+            } else {
+                selectedCategories.insert(category)
+            }
+        }
+    }
+    
 }
 
 class FiltersViewController:
@@ -212,10 +224,13 @@ class FiltersViewController:
     var filterCategories: [(sectionName: String, sectionHandler: TableViewExpandableSection)] = []
     private var sortBySection: SortByFilterSection?
     private var distanceSection: DistanceFilterSection?
+    private var categoriesSection: CategoriesFilterSection?
 
     @IBAction func onSearchButton(_ sender: Any) {
         let filterSettings = FilterSettings()
-        filterSettings.sortMode = (filterCategories[0].sectionHandler as! SortByFilterSection).selectedSortMode.mode
+        filterSettings.sortMode = sortBySection!.selectedSortMode.mode
+        filterSettings.distance = distanceSection!.selectedDistance.distance
+        filterSettings.categories = Array(categoriesSection!.selectedCategories)
         filterSettings.saveToUserDefaults()
         dismiss(animated: true, completion: nil)
     }
@@ -229,10 +244,11 @@ class FiltersViewController:
         let defaultValues = FilterSettings.getFromUserDefaults()
         sortBySection = SortByFilterSection(parent: self, section: 0, selectedValue: defaultValues.sortMode)
         distanceSection = DistanceFilterSection(parent: self, section: 1, selectedValue: defaultValues.distance)
-        
+        categoriesSection = CategoriesFilterSection(parent: self, section: 2, selectedValue: defaultValues.categories)
         filterCategories = [
             (sectionName: "Sort By", sectionHandler: sortBySection!),
-            (sectionName: "Distance", sectionHandler: distanceSection!)
+            (sectionName: "Distance", sectionHandler: distanceSection!),
+            (sectionName: "Categories", sectionHandler: categoriesSection!)
         ]
     }
     
@@ -240,6 +256,8 @@ class FiltersViewController:
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80.0
         // Do any additional setup after loading the view.
     }
 

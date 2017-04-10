@@ -184,7 +184,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="0fO-rc-QYp" firstAttribute="centerY" secondItem="jSg-3d-DLq" secondAttribute="centerY" id="Q8h-Kt-Iu8"/>
+                                                <constraint firstItem="PS4-4R-K87" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jSg-3d-DLq" secondAttribute="top" constant="8" id="bWD-UO-oyn"/>
                                                 <constraint firstItem="0fO-rc-QYp" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leading" constant="8" id="lE0-7Q-PRL"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PS4-4R-K87" secondAttribute="bottom" constant="8" id="oA3-C8-7xl"/>
                                                 <constraint firstAttribute="trailing" secondItem="4qK-y5-lIi" secondAttribute="trailing" id="qFo-fs-mnl"/>
                                                 <constraint firstItem="4qK-y5-lIi" firstAttribute="top" secondItem="jSg-3d-DLq" secondAttribute="top" id="ui9-fz-faF"/>
                                                 <constraint firstItem="4qK-y5-lIi" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leading" id="wPV-Cd-cTa"/>
@@ -247,6 +249,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="Xib-db-PXI" secondAttribute="trailing" constant="8" id="9Cw-TK-PDv"/>
                                                 <constraint firstItem="wz3-eq-l6x" firstAttribute="leading" secondItem="96a-bz-FQ2" secondAttribute="leading" constant="8" id="H62-lJ-Xck"/>
                                                 <constraint firstItem="wz3-eq-l6x" firstAttribute="centerY" secondItem="96a-bz-FQ2" secondAttribute="centerY" id="WmS-b8-Ph1"/>
+                                                <constraint firstItem="wz3-eq-l6x" firstAttribute="top" relation="greaterThanOrEqual" secondItem="96a-bz-FQ2" secondAttribute="top" constant="8" id="X4N-ZM-bCT"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wz3-eq-l6x" secondAttribute="bottom" constant="8" id="axb-NI-BZz"/>
                                                 <constraint firstItem="Xib-db-PXI" firstAttribute="centerY" secondItem="96a-bz-FQ2" secondAttribute="centerY" id="mTy-V7-Wbf"/>
                                                 <constraint firstAttribute="bottom" secondItem="DMh-IA-0vd" secondAttribute="bottom" id="oA6-19-A4D"/>
                                                 <constraint firstItem="DMh-IA-0vd" firstAttribute="top" secondItem="96a-bz-FQ2" secondAttribute="top" id="su5-Pp-1Ob"/>
@@ -256,6 +260,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="border" destination="DMh-IA-0vd" id="dur-Xa-DO5"/>
                                             <outlet property="checkMark" destination="Xib-db-PXI" id="Prp-WE-Hq7"/>
                                             <outlet property="checkMarkLabel" destination="wz3-eq-l6x" id="y9E-y4-UmB"/>
                                             <outlet property="expandIcon" destination="dvO-go-vr3" id="pwd-Yj-QfI"/>
@@ -301,10 +306,12 @@
                                                 <constraint firstItem="R0g-tG-blL" firstAttribute="leading" secondItem="yJ4-ae-RCG" secondAttribute="leading" id="0Aq-9S-T45"/>
                                                 <constraint firstAttribute="bottom" secondItem="R0g-tG-blL" secondAttribute="bottom" id="7Ru-wA-Zkl"/>
                                                 <constraint firstItem="hvn-Xm-rab" firstAttribute="centerY" secondItem="yJ4-ae-RCG" secondAttribute="centerY" id="Ecr-4d-RWh"/>
+                                                <constraint firstItem="shj-oV-Khy" firstAttribute="top" relation="greaterThanOrEqual" secondItem="yJ4-ae-RCG" secondAttribute="top" constant="8" id="IYb-0U-UZB"/>
                                                 <constraint firstAttribute="trailing" secondItem="R0g-tG-blL" secondAttribute="trailing" id="cvu-8d-anR"/>
                                                 <constraint firstItem="R0g-tG-blL" firstAttribute="top" secondItem="yJ4-ae-RCG" secondAttribute="top" id="kVA-4R-ub8"/>
                                                 <constraint firstItem="shj-oV-Khy" firstAttribute="centerY" secondItem="yJ4-ae-RCG" secondAttribute="centerY" id="mfv-OY-6Lx"/>
                                                 <constraint firstAttribute="trailing" secondItem="hvn-Xm-rab" secondAttribute="trailing" constant="8" id="s5b-NO-Xzj"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="shj-oV-Khy" secondAttribute="bottom" constant="8" id="yKY-Xj-zp0"/>
                                                 <constraint firstItem="shj-oV-Khy" firstAttribute="leading" secondItem="yJ4-ae-RCG" secondAttribute="leading" constant="8" id="zAI-R5-q6F"/>
                                             </constraints>
                                         </tableViewCellContentView>
