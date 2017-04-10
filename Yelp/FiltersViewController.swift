@@ -147,7 +147,7 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
     private var isExpanded: Bool = false
     
     var sectionNumber: Int
-    let selectedCategories: Set<String> = []
+    var selectedCategories: Set<String> = []
     weak var delegate: TableViewWithExpandableSectionsDelegate?
     
     required init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?) {
@@ -169,8 +169,9 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let numberRows = self.tableView(tableView: tableView, numberOfRowsInSection: indexPath.section)
-        if (indexPath.row == numberRows - 1){
+        
+        let numberRows = tableView.numberOfRows(inSection: indexPath.section)
+        if (indexPath.row == numberRows - 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: ExpandCollapseCellIdentifier, for: indexPath) as! ExpandCollapseCell
             cell.showExpand = !isExpanded
             return cell
@@ -184,7 +185,7 @@ class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let numberRows = self.tableView(tableView: tableView, numberOfRowsInSection: indexPath.section)
+        let numberRows = tableView.numberOfRows(inSection: indexPath.section)
         if (indexPath.row == numberRows - 1) {
             isExpanded = !isExpanded
         }
