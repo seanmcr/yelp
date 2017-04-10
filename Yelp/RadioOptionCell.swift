@@ -10,9 +10,7 @@ import UIKit
 
 class RadioOptionCell: UITableViewCell {
 
-    @IBOutlet weak var checkMarkLabel: UILabel!
-    @IBOutlet weak var checkMark: CircularCheckMarkView!
-    @IBOutlet weak var expandIcon: UIImageView!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

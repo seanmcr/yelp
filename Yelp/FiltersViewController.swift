@@ -10,9 +10,10 @@ import UIKit
 
 let RadioOptionCellIdentifier = "RadioOptionCell"
 let SwitchCellIdentifier = "SwitchCell"
+let ExpandCollapseCellIdentifier = "ExpandCollapseCell"
 
 protocol TableViewExpandableSection: NSObjectProtocol {
-    init(parent: TableViewWithExpandableSectionsDelegate, section: Int)
+    init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?)
     var sectionNumber: Int { get }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -29,16 +30,28 @@ class SortByFilterSection: NSObject, TableViewExpandableSection {
         (name: "Distance", mode: .distance),
         (name: "Highest Rated", mode: .highestRated)
     ]
-    private var isExpanded: Bool = true
+    private var isExpanded: Bool = false
 
     var sectionNumber: Int
     var selectedSortMode: (name: String, mode: YelpSortMode)
     weak var delegate: TableViewWithExpandableSectionsDelegate?
     
-    required init(parent: TableViewWithExpandableSectionsDelegate, section: Int) {
+    required init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?) {
         delegate = parent
         sectionNumber = section
-        selectedSortMode = SortByFilterSection.sortModes[0]
+        if (selectedValue != nil) {
+            let startingSortMode = selectedValue as! YelpSortMode
+            switch startingSortMode {
+            case .bestMatched:
+                selectedSortMode = SortByFilterSection.sortModes[0]
+            case .distance:
+                selectedSortMode = SortByFilterSection.sortModes[1]
+            case .highestRated:
+                selectedSortMode = SortByFilterSection.sortModes[2]
+            }
+        } else {
+            selectedSortMode = SortByFilterSection.sortModes[0]
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,6 +83,115 @@ class SortByFilterSection: NSObject, TableViewExpandableSection {
     }
 }
 
+class DistanceFilterSection: NSObject, TableViewExpandableSection {
+    static private let distanceFilters: [(name: String, distance: Int?)] = [
+        (name: "Auto", distance: nil),
+        (name: "0.3 miles", distance: 483),
+        (name: "1 mile", distance: 1609),
+        (name: "5 miles", distance: 8047),
+        (name: "25 miles", distance: 40234)
+    ]
+    private var isExpanded: Bool = false
+    
+    var sectionNumber: Int
+    var selectedDistance: (name: String, distance: Int?)
+    weak var delegate: TableViewWithExpandableSectionsDelegate?
+    
+    required init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?) {
+        delegate = parent
+        sectionNumber = section
+        selectedDistance = DistanceFilterSection.distanceFilters[0]
+        if (selectedValue != nil) {
+            let defaultDistance = selectedValue as! Int
+            for distanceFilter in DistanceFilterSection.distanceFilters {
+                if (distanceFilter.distance == defaultDistance){
+                    selectedDistance = distanceFilter
+                    break
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        assert(section == sectionNumber)
+        return isExpanded ? DistanceFilterSection.distanceFilters.count : 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RadioOptionCellIdentifier, for: indexPath) as! RadioOptionCell
+        if (isExpanded){
+            let distanceFilter = DistanceFilterSection.distanceFilters[indexPath.row]
+            cell.checkMarkLabel.text = distanceFilter.name
+            cell.checkMark.checked = selectedDistance.distance == distanceFilter.distance
+            cell.checkMark.isHidden = !cell.checkMark.checked
+        } else {
+            cell.checkMarkLabel.text = selectedDistance.name
+            cell.checkMark.isHidden = true
+        }
+        cell.expandIcon.isHidden = isExpanded
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (isExpanded){
+            selectedDistance = DistanceFilterSection.distanceFilters[indexPath.row]
+        }
+        isExpanded = !isExpanded
+        delegate?.tableViewExpandableSection(section: self, didExpand: isExpanded)
+    }
+}
+
+class CategoriesFilterSection: NSObject, TableViewExpandableSection, SwitchCellDelegate {
+    static private let categoryFilters = YelpApi.categories
+    
+    private var isExpanded: Bool = false
+    
+    var sectionNumber: Int
+    let selectedCategories: Set<String> = []
+    weak var delegate: TableViewWithExpandableSectionsDelegate?
+    
+    required init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?) {
+        delegate = parent
+        sectionNumber = section
+        if (selectedValue != nil) {
+            let defaultCategories = selectedValue as! [String]
+            for category in defaultCategories {
+                selectedCategories.insert(category)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        assert(section == sectionNumber)
+        return isExpanded
+            ? CategoriesFilterSection.categoryFilters.count + 1
+            : 6 // In collapsed state, 5 types + 'more' cell
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let numberRows = self.tableView(tableView: tableView, numberOfRowsInSection: indexPath.section)
+        if (indexPath.row == numberRows - 1){
+            let cell = tableView.dequeueReusableCell(withIdentifier: ExpandCollapseCellIdentifier, for: indexPath) as! ExpandCollapseCell
+            cell.showExpand = !isExpanded
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCellIdentifier, for: indexPath) as! SwitchCell
+            let categoryFilter = CategoriesFilterSection.categoryFilters[indexPath.row]
+            cell.switchLabel.text = categoryFilter.name
+            cell.toggleSwitch.isOn = selectedCategories.contains(categoryFilter.code)
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let numberRows = self.tableView(tableView: tableView, numberOfRowsInSection: indexPath.section)
+        if (indexPath.row == numberRows - 1) {
+            isExpanded = !isExpanded
+        }
+        delegate?.tableViewExpandableSection(section: self, didExpand: isExpanded)
+    }
+}
+
 class FiltersViewController:
     UIViewController,
     UITableViewDelegate,
@@ -87,8 +209,13 @@ class FiltersViewController:
     @IBOutlet weak var tableView: UITableView!
 
     var filterCategories: [(sectionName: String, sectionHandler: TableViewExpandableSection)] = []
+    private var sortBySection: SortByFilterSection?
+    private var distanceSection: DistanceFilterSection?
 
     @IBAction func onSearchButton(_ sender: Any) {
+        let filterSettings = FilterSettings()
+        filterSettings.sortMode = (filterCategories[0].sectionHandler as! SortByFilterSection).selectedSortMode.mode
+        filterSettings.saveToUserDefaults()
         dismiss(animated: true, completion: nil)
     }
 
@@ -98,8 +225,13 @@ class FiltersViewController:
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        let defaultValues = FilterSettings.getFromUserDefaults()
+        sortBySection = SortByFilterSection(parent: self, section: 0, selectedValue: defaultValues.sortMode)
+        distanceSection = DistanceFilterSection(parent: self, section: 1, selectedValue: defaultValues.distance)
+        
         filterCategories = [
-            (sectionName: "Sort By", sectionHandler: SortByFilterSection(parent: self, section: 0))
+            (sectionName: "Sort By", sectionHandler: sortBySection!),
+            (sectionName: "Distance", sectionHandler: distanceSection!)
         ]
     }
     

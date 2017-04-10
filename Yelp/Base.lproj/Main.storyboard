@@ -261,6 +261,58 @@
                                             <outlet property="expandIcon" destination="dvO-go-vr3" id="pwd-Yj-QfI"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandCollapseCell" rowHeight="73" id="w65-8i-cFI" customClass="ExpandCollapseCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="174" width="375" height="73"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w65-8i-cFI" id="yJ4-ae-RCG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R0g-tG-blL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                            <color key="value" red="0.45618118520000001" green="0.45618118520000001" blue="0.45618118520000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shj-oV-Khy">
+                                                    <rect key="frame" x="8" y="25" width="47.5" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expandIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hvn-Xm-rab">
+                                                    <rect key="frame" x="347" y="26" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="BqN-lP-eZG"/>
+                                                        <constraint firstAttribute="height" constant="20" id="lF7-ap-jMr"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="R0g-tG-blL" firstAttribute="leading" secondItem="yJ4-ae-RCG" secondAttribute="leading" id="0Aq-9S-T45"/>
+                                                <constraint firstAttribute="bottom" secondItem="R0g-tG-blL" secondAttribute="bottom" id="7Ru-wA-Zkl"/>
+                                                <constraint firstItem="hvn-Xm-rab" firstAttribute="centerY" secondItem="yJ4-ae-RCG" secondAttribute="centerY" id="Ecr-4d-RWh"/>
+                                                <constraint firstAttribute="trailing" secondItem="R0g-tG-blL" secondAttribute="trailing" id="cvu-8d-anR"/>
+                                                <constraint firstItem="R0g-tG-blL" firstAttribute="top" secondItem="yJ4-ae-RCG" secondAttribute="top" id="kVA-4R-ub8"/>
+                                                <constraint firstItem="shj-oV-Khy" firstAttribute="centerY" secondItem="yJ4-ae-RCG" secondAttribute="centerY" id="mfv-OY-6Lx"/>
+                                                <constraint firstAttribute="trailing" secondItem="hvn-Xm-rab" secondAttribute="trailing" constant="8" id="s5b-NO-Xzj"/>
+                                                <constraint firstItem="shj-oV-Khy" firstAttribute="leading" secondItem="yJ4-ae-RCG" secondAttribute="leading" constant="8" id="zAI-R5-q6F"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="expandCollapseImage" destination="hvn-Xm-rab" id="Hx6-Io-DWm"/>
+                                            <outlet property="moreLessLabel" destination="shj-oV-Khy" id="odg-Wd-fC4"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

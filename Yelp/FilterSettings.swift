@@ -18,7 +18,7 @@ class FilterSettings {
         let userDefaults = UserDefaults.standard
         userDefaults.setValuesForKeys([
             "onlyDeals": onlyDeals as Any,
-            "sortMode": sortMode as Any,
+            "sortMode": sortMode?.rawValue as Any,
             "categories": categories as Any,
             "distance": distance as Any
         ])
@@ -29,7 +29,8 @@ class FilterSettings {
         let filterSettings = FilterSettings()
         let userDefaults = UserDefaults.standard
         filterSettings.onlyDeals = userDefaults.value(forKey: "onlyDeals") as? Bool
-        filterSettings.sortMode = userDefaults.value(forKey: "sortMode") as? YelpSortMode
+        let sortMode = userDefaults.value(forKey: "sortMode") as? Int
+        filterSettings.sortMode = (sortMode != nil) ? YelpSortMode(rawValue: sortMode!) : nil
         filterSettings.categories = userDefaults.value(forKey: "categories") as? [String]
         filterSettings.distance = userDefaults.value(forKey: "distance") as? Int
         return filterSettings
