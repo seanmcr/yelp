@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DealsFilterSection: NSObject, TableViewExpandableSection {
+class DealsFilterSection: NSObject, TableViewExpandableSection, SwitchCellDelegate {
     
     var onlyDeals: Bool!
     
@@ -29,8 +29,14 @@ class DealsFilterSection: NSObject, TableViewExpandableSection {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCellIdentifier, for: indexPath) as! SwitchCell
+        cell.switchLabel.text = "Offering a Deal"
         cell.toggleSwitch.isOn = onlyDeals
+        cell.delegate = self
         return cell
+    }
+    
+    func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
+        onlyDeals = value
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

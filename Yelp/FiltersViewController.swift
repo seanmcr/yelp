@@ -12,6 +12,10 @@ let RadioOptionCellIdentifier = "RadioOptionCell"
 let SwitchCellIdentifier = "SwitchCell"
 let ExpandCollapseCellIdentifier = "ExpandCollapseCell"
 
+protocol FiltersViewControllerDelegate {
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters:FilterSettings)
+}
+
 protocol TableViewExpandableSection: NSObjectProtocol {
     init(parent: TableViewWithExpandableSectionsDelegate, section: Int, selectedValue: Any?)
     var sectionNumber: Int { get }
@@ -37,7 +41,8 @@ class FiltersViewController:
         tableView.endUpdates()
     }
 
-    var cellSwitchStates: [Int:Bool] = [:]
+
+    var delegate: FiltersViewControllerDelegate?
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -54,6 +59,7 @@ class FiltersViewController:
         filterSettings.distance = distanceSection!.selectedDistance.distance
         filterSettings.categories = Array(categoriesSection!.selectedCategories)
         filterSettings.saveToUserDefaults()
+        delegate?.filtersViewController(filtersViewController: self, didUpdateFilters: filterSettings)
         dismiss(animated: true, completion: nil)
     }
 
@@ -82,8 +88,6 @@ class FiltersViewController:
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80.0
-        tableView.tableHeaderView = nil
-        // Do any additional setup after loading the view.
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -100,22 +104,12 @@ class FiltersViewController:
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return filterCategories[indexPath.section].sectionHandler.tableView(tableView, cellForRowAt: indexPath)
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-//        cell.delegate = self
-//        cell.toggleSwitch.isOn = cellSwitchStates[indexPath.row] ?? false
-//        cell.switchLabel.text = YelpApi.categories[indexPath.row]["name"]
-//        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         return filterCategories[indexPath.section].sectionHandler.tableView(tableView, didSelectRowAt: indexPath)
     }
 
-    func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
-        if let row = tableView.indexPath(for: switchCell)?.row {
-            cellSwitchStates[row] = value
-        }
-    }
     /*
     // MARK: - Navigation
 

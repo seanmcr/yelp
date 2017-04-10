@@ -13,7 +13,7 @@
         <!--Yelp-->
         <scene sceneID="5L9-Uz-lNK">
             <objects>
-                <viewController id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hR0-74-jRp"/>
                         <viewControllerLayoutGuide type="bottom" id="VBY-gq-v8E"/>
@@ -138,7 +138,7 @@
         <!--Filters-->
         <scene sceneID="6JO-yO-8ft">
             <objects>
-                <viewController id="RCJ-Uu-lCu" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="RCJ-Uu-lCu" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jv3-dl-plq"/>
                         <viewControllerLayoutGuide type="bottom" id="O4S-vt-Yia"/>
@@ -159,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qK-y5-lIi">
-                                                    <rect key="frame" x="16" y="0.0" width="351" height="73"/>
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="73"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -174,7 +174,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fO-rc-QYp">
-                                                    <rect key="frame" x="24" y="25" width="47.5" height="23"/>
+                                                    <rect key="frame" x="16" y="25" width="47.5" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -191,7 +191,7 @@
                                                 <constraint firstItem="PS4-4R-K87" firstAttribute="trailing" secondItem="4qK-y5-lIi" secondAttribute="trailing" constant="-8" id="jAX-bj-QTa"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PS4-4R-K87" secondAttribute="bottom" constant="8" id="oA3-C8-7xl"/>
                                                 <constraint firstItem="4qK-y5-lIi" firstAttribute="top" secondItem="jSg-3d-DLq" secondAttribute="top" id="ui9-fz-faF"/>
-                                                <constraint firstItem="4qK-y5-lIi" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leadingMargin" constant="8" id="wvd-mJ-bNt"/>
+                                                <constraint firstItem="4qK-y5-lIi" firstAttribute="leading" secondItem="jSg-3d-DLq" secondAttribute="leadingMargin" id="wvd-mJ-bNt"/>
                                                 <constraint firstItem="PS4-4R-K87" firstAttribute="centerY" secondItem="jSg-3d-DLq" secondAttribute="centerY" id="yxU-po-bfM"/>
                                                 <constraint firstAttribute="bottom" secondItem="4qK-y5-lIi" secondAttribute="bottom" id="z15-eU-Caw"/>
                                             </constraints>

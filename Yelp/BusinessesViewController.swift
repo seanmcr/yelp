@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import ARSLineProgress
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController:
+    UIViewController,
+    UITableViewDelegate,
+    UITableViewDataSource,
+    UISearchBarDelegate,
+    FiltersViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var businesses: [Business]!
+    var searchSettings: FilterSettings?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,22 +28,48 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        searchSettings = FilterSettings.getFromUserDefaults()
+        
+        let searchBar = UISearchBar()
+        navigationItem.titleView = searchBar
+        searchBar.delegate = self
+        
+        Business.searchWithTerm(term: "", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             self.tableView.reloadData()
         })
-        
-        /* Example of Yelp search with more search options specified
-         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-         self.businesses = businesses
-         
-         for business in businesses {
-         print(business.name!)
-         print(business.address!)
-         }
-         }
-         */
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        searchSettings = FilterSettings.getFromUserDefaults()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationNavController = segue.destination as! UINavigationController
+        let filtersViewController = destinationNavController.topViewController as! FiltersViewController
+        filtersViewController.delegate = self
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if (searchBar.text != nil) {
+            ARSLineProgress.show()
+            Business.searchWithTerm(term: searchBar.text!, sort: searchSettings?.sortMode, distance: searchSettings?.distance, categories: searchSettings?.categories, deals: searchSettings?.onlyDeals, completion: { (businesses: [Business]?, error: Error?) -> Void in
+                if (error != nil){
+                    ARSLineProgress.showFail()
+                } else {
+                    ARSLineProgress.hide()
+                }
+                self.businesses = businesses
+                self.tableView.reloadData()
+            })
+        }
+    }
+    
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: FilterSettings) {
+        searchSettings = filters
+        searchBarSearchButtonClicked(navigationItem.titleView as! UISearchBar)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
