@@ -8,18 +8,25 @@
 
 import UIKit
 import ARSLineProgress
+import CoreLocation
 
 class BusinessesViewController:
     UIViewController,
     UITableViewDelegate,
     UITableViewDataSource,
     UISearchBarDelegate,
-    FiltersViewControllerDelegate {
+    FiltersViewControllerDelegate,
+    CLLocationManagerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var businesses: [Business]!
     var searchSettings: FilterSettings?
+    var searchBar: UISearchBar!
+    var locationManager: CLLocationManager!
+    
+    var latitude: Float?
+    var longitude: Float?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +37,11 @@ class BusinessesViewController:
         
         searchSettings = FilterSettings.getFromUserDefaults()
         
-        let searchBar = UISearchBar()
+        searchBar = UISearchBar()
         navigationItem.titleView = searchBar
         searchBar.delegate = self
         
-        Business.searchWithTerm(term: "", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
-            self.businesses = businesses
-            self.tableView.reloadData()
-        })
-
+        initializeCurrentLocation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +54,9 @@ class BusinessesViewController:
         filtersViewController.delegate = self
     }
     
+    @IBAction func onBarSearchButton(_ sender: Any) {
+        searchBarSearchButtonClicked(searchBar)
+    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if (searchBar.text != nil) {
             ARSLineProgress.show()
@@ -59,7 +64,7 @@ class BusinessesViewController:
                 if (error != nil){
                     ARSLineProgress.showFail()
                 } else {
-                    ARSLineProgress.hide()
+                    ARSLineProgress.showSuccess()
                 }
                 self.businesses = businesses
                 self.tableView.reloadData()
@@ -82,6 +87,28 @@ class BusinessesViewController:
         return businesses?.count ?? 0
     }
 
+    
+    func initializeCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        manager.stopUpdatingLocation()
+        
+        print("user latitude = \(userLocation.coordinate.latitude)")
+        print("user longitude = \(userLocation.coordinate.longitude)")
+        YelpClient.latitude = userLocation.coordinate.latitude
+        YelpClient.longitude = userLocation.coordinate.longitude
+        searchBarSearchButtonClicked(searchBar)
+    }
     
     /*
      // MARK: - Navigation

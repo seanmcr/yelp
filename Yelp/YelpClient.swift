@@ -29,6 +29,9 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     
     static let sharedInstance = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
     
+    static var latitude: Double?
+    static var longitude: Double?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -51,7 +54,9 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
         // Default the location to San Francisco
-        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
+        var parameters: [String : AnyObject] = ["term": term as AnyObject]
+        
+        parameters["ll"] = "\(YelpClient.latitude!),\(YelpClient.longitude!)" as AnyObject
         
         if sort != nil {
             parameters["sort"] = sort!.rawValue as AnyObject

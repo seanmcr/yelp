@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="VBY-gq-v8E"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XhR-oz-92f">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="135" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Sa-jr-jWX">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="135" id="yHa-Wm-ExG" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
@@ -60,7 +60,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mexican, Tacos" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cys-59-nsv">
-                                                    <rect key="frame" x="101" y="76" width="94" height="16"/>
+                                                    <rect key="frame" x="101" y="76" width="93.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.38680139137673253" green="0.38680139137673253" blue="0.38680139137673253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -87,6 +87,7 @@
                                                 <constraint firstItem="Mpf-Ny-2gQ" firstAttribute="top" secondItem="brN-5l-3PE" secondAttribute="top" id="MeF-hn-Nun"/>
                                                 <constraint firstItem="30Y-zs-aUK" firstAttribute="leading" secondItem="Mpf-Ny-2gQ" secondAttribute="leading" id="MwW-wz-cek"/>
                                                 <constraint firstItem="mDz-dj-j7g" firstAttribute="leading" secondItem="30Y-zs-aUK" secondAttribute="trailing" constant="8" id="Oby-4l-hql"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Cys-59-nsv" secondAttribute="trailing" constant="8" id="aKc-2o-hb1"/>
                                                 <constraint firstItem="Mh1-U9-gfj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mpf-Ny-2gQ" secondAttribute="trailing" constant="8" id="dsS-MG-vxI"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mh1-U9-gfj" secondAttribute="trailing" constant="8" id="fgG-fa-Urw"/>
                                                 <constraint firstItem="Mh1-U9-gfj" firstAttribute="top" secondItem="Mpf-Ny-2gQ" secondAttribute="top" id="fgd-CV-gxs"/>
@@ -126,6 +127,11 @@
                                 <segue destination="CAc-Xq-eGx" kind="presentation" id="UCi-Fx-ee1"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="mca-AF-svZ">
+                            <connections>
+                                <action selector="onBarSearchButton:" destination="2xI-yr-O5N" id="Lhf-Vl-8ZT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="7Sa-jr-jWX" id="1BJ-dO-0WQ"/>
@@ -144,12 +150,13 @@
                         <viewControllerLayoutGuide type="bottom" id="O4S-vt-Yia"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wCe-Gg-Wis">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="D1Z-hQ-3wI">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="73" id="5GP-go-AXT" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="73"/>
@@ -359,9 +366,15 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ofW-bE-XAI" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0OX-aJ-Gfq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="0OX-aJ-Gfq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.04597381032200365" blue="0.0022452496407771028" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.81879452720207258" green="0.037643104286282744" blue="0.0018383981180707112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -377,9 +390,14 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CAc-Xq-eGx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nzI-xo-zHD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="nzI-xo-zHD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.81879452720000001" green="0.03764310429" blue="0.0018383981179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
